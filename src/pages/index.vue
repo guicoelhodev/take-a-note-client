@@ -1,3 +1,3 @@
 <template>
-    <h1>Hello Nuxt</h1>
+    <h1 class="text-3xl text-red-400">Hello Nuxt</h1>
 </template>

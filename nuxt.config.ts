@@ -3,4 +3,5 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   title: "Take a Note",
   srcDir: "./src",
+  modules: ["@nuxtjs/tailwindcss"],
 });
