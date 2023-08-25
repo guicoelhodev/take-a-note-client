@@ -16,8 +16,10 @@
     "nuxt": "^3.6.5"
   },
   "dependencies": {
+    "@tiptap/extension-code-block-lowlight": "^2.1.7",
     "@tiptap/pm": "^2.1.7",
     "@tiptap/starter-kit": "^2.1.7",
-    "@tiptap/vue-3": "^2.1.7"
+    "@tiptap/vue-3": "^2.1.7",
+    "lowlight": "^2.9.0"
   }
 }
