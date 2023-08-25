@@ -1,7 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindTypography from "@tailwindcss/typography";
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  title: "Take a Note",
   srcDir: "./src",
   modules: ["@nuxtjs/tailwindcss"],
+  tailwindcss: {
+    config: {
+      plugins: [tailwindTypography],
+    },
+  },
 });
