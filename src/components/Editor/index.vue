@@ -1,5 +1,5 @@
 <template>
-  <div class="prose">
+  <div class="w-full max-w-[1366px] prose">
     <h1>Comparing Vue.js and React.js</h1>
     <p>Posted on August 25, 2023</p>
 
