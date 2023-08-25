@@ -13,9 +13,11 @@
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^18.17.3",
+    "@types/vue": "^2.0.0",
     "nuxt": "^3.6.5"
   },
   "dependencies": {
+    "@tiptap/extension-bubble-menu": "^2.1.7",
     "@tiptap/extension-code-block-lowlight": "^2.1.7",
     "@tiptap/pm": "^2.1.7",
     "@tiptap/starter-kit": "^2.1.7",
