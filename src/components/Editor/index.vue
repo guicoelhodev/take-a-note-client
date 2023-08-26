@@ -1,17 +1,9 @@
 <script>
 import StarterKit from "@tiptap/starter-kit";
-import { BubbleMenu, Editor, EditorContent } from "@tiptap/vue-3";
+import { Editor, EditorContent } from "@tiptap/vue-3";
 import { blogContent } from "./example.ts";
 import { lowlight } from "lowlight";
 import { Icon } from "@iconify/vue";
-import {
-  PopoverArrow,
-  PopoverClose,
-  PopoverContent,
-  PopoverPortal,
-  PopoverRoot,
-  PopoverTrigger,
-} from "radix-vue";
 
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
@@ -32,7 +24,6 @@ lowlight.registerLanguage("ts", ts);
 export default {
   components: {
     EditorContent,
-    BubbleMenu,
     Icon,
   },
 
@@ -73,35 +64,7 @@ export default {
 <template>
   <ClientOnly fallback="Loading...">
     <div class="w-full max-w-[1366px] prose outline-0" id="menu">
-      <bubble-menu v-if="editor" :editor="editor">
-        <PopoverRoot>
-          <PopoverPortal>
-            <PopoverContent
-              class="bg-white flex gap-4 p-2 rounded-md shadow-lg"
-            >
-              <BubbleButton
-                icon="tabler:bold"
-                @click="editor.chain().focus().toggleBold().run()"
-                :data-active="editor.isActive('bold')"
-              />
-
-              <BubbleButton
-                icon="tabler:italic"
-                @click="editor.chain().focus().toggleItalic().run()"
-                :data-active="editor.isActive('italic')"
-              />
-
-              <BubbleButton
-                icon="ri:strikethrough"
-                @click="editor.chain().focus().toggleStrike().run()"
-                :data-active="editor.isActive('strike')"
-              />
-            </PopoverContent>
-          </PopoverPortal>
-        </PopoverRoot>
-        <!--  -->
-      </bubble-menu>
-
+      <BubbleMenu :editor="editor" />
       <editor-content :v-if="editor" :editor="editor" />
     </div>
   </ClientOnly>
