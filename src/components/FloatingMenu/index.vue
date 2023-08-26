@@ -8,16 +8,11 @@
   >
     <ul class="p-0 m-0 flex flex-col max-h-48 overflow-y-scroll no-scrollbar">
       <FloatingMenuButton
-        v-for="(button, index) in buttons"
+        v-for="(button, index) in filteredButtons"
         :title="button.title"
         :subtitle="button.subtitle"
         :icon="button.icon"
-        @click="
-          () => {
-            button.onClick();
-            console.log('foi');
-          }
-        "
+        @click="button.onClick()"
       />
     </ul>
   </floating-menu>
@@ -25,7 +20,15 @@
 
 <script setup lang="ts">
 import { FloatingMenu } from "@tiptap/vue-3";
+import { ref, computed } from "vue";
 const { editor } = defineProps<{ editor: any }>();
+
+const inputTyped = ref<null | string>("");
+const filteredButtons = computed(() =>
+  buttons.filter((b) =>
+    b.title.toLowerCase().includes(inputTyped.value.toLowerCase())
+  )
+);
 
 type IButton = {
   title: string;
@@ -37,7 +40,13 @@ type IButton = {
 const shouldShowOpenOptions = (
   props: Exclude<FloatingMenuPluginProps["shouldShow"], null>
 ) => {
-  return props.state.selection.$from.nodeBefore?.textContent === "/";
+  const currentText = props.state.selection.$from.nodeBefore?.textContent ?? "";
+
+  if (currentText.includes("/")) {
+    inputTyped.value = currentText.substring(1);
+  }
+
+  return currentText.includes("/") && filteredButtons.value.length > 0;
 };
 
 const buttons: IButton[] = [
@@ -45,9 +54,7 @@ const buttons: IButton[] = [
     title: "Bullets",
     subtitle: "Create bullet list",
     icon: "fluent-mdl2:radio-bullet",
-    onClick: () => {
-      return editor.chain().focus().toggleBulletList().run();
-    },
+    onClick: () => editor.chain().focus().toggleBulletList().run(),
   },
   {
     title: "Order list",
