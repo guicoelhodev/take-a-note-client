@@ -10,4 +10,5 @@ export default defineNuxtConfig({
       plugins: [tailwindTypography],
     },
   },
+  css: ["@/assets/css/main.css"],
 });
