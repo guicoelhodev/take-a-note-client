@@ -1,5 +1,7 @@
 <template>
-  <button class="flex gap-2 items-center bg-white min-w-[200px]">
+  <button
+    class="flex gap-2 items-center bg-white min-w-[200px] focus:outline-none focus:bg-zinc-100"
+  >
     <Icon :icon="props.icon" class="w-10 h-6" />
     <div class="flex flex-col text-left p-2">
       <span class="text-sm text-bold">{{ props.title }}</span>

@@ -2,21 +2,22 @@
   <floating-menu
     :editor="editor"
     :tippy-options="{ duration: 100 }"
-    :shouldShow="
-      ({ state }) => state.selection.$from.nodeBefore?.textContent === '/'
-    "
+    :shouldShow="shouldShowOpenOptions"
     class="bg-zinc-50 p-1 rounded-md shadow-lg flex flex-col items-start"
     v-if="editor"
   >
-    <ul
-      class="p-0 m-0 flex flex-col gap-[2px] max-h-48 overflow-y-scroll no-scrollbar"
-    >
+    <ul class="p-0 m-0 flex flex-col max-h-48 overflow-y-scroll no-scrollbar">
       <FloatingMenuButton
         v-for="(button, index) in buttons"
         :title="button.title"
         :subtitle="button.subtitle"
         :icon="button.icon"
-        @click="button.onClick()"
+        @click="
+          () => {
+            button.onClick();
+            console.log('foi');
+          }
+        "
       />
     </ul>
   </floating-menu>
@@ -33,12 +34,20 @@ type IButton = {
   onClick: () => void;
 };
 
+const shouldShowOpenOptions = (
+  props: Exclude<FloatingMenuPluginProps["shouldShow"], null>
+) => {
+  return props.state.selection.$from.nodeBefore?.textContent === "/";
+};
+
 const buttons: IButton[] = [
   {
     title: "Bullets",
     subtitle: "Create bullet list",
     icon: "fluent-mdl2:radio-bullet",
-    onClick: () => editor.chain().focus().toggleBulletList().run(),
+    onClick: () => {
+      return editor.chain().focus().toggleBulletList().run();
+    },
   },
   {
     title: "Order list",
@@ -69,6 +78,19 @@ const buttons: IButton[] = [
     subtitle: "Create code block",
     icon: "teenyicons:code-solid",
     onClick: () => editor.chain().focus().toggleCodeBlock().run(),
+  },
+
+  {
+    title: "Blockquotes",
+    subtitle: "Create blockquote",
+    icon: "tabler:blockquote",
+    onClick: () => editor.chain().focus().toggleBlockquote().run(),
+  },
+  {
+    title: "Divider",
+    subtitle: "Create a divider block",
+    icon: "pepicons-print:line-x",
+    onClick: () => editor.chain().focus().setHorizontalRule().run(),
   },
 ];
 </script>
