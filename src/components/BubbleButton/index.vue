@@ -1,9 +1,3 @@
-<template>
-  <button :@click="click">
-    <Icon :icon="icon" />
-  </button>
-</template>
-
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 
@@ -12,6 +6,10 @@ type IProps = {
   click: ((payload: MouseEvent) => void) | undefined;
 };
 const { icon, click } = defineProps<IProps>();
-
-console.log(icon);
 </script>
+
+<template>
+  <button :@click="click" class="data-[active=true]:text-red-400 font-bold">
+    <Icon :icon="icon" />
+  </button>
+</template>

@@ -82,16 +82,19 @@ export default {
               <BubbleButton
                 icon="tabler:bold"
                 @click="editor.chain().focus().toggleBold().run()"
+                :data-active="editor.isActive('bold')"
               />
 
               <BubbleButton
                 icon="tabler:italic"
                 @click="editor.chain().focus().toggleItalic().run()"
+                :data-active="editor.isActive('italic')"
               />
 
               <BubbleButton
                 icon="ri:strikethrough"
                 @click="editor.chain().focus().toggleStrike().run()"
+                :data-active="editor.isActive('strike')"
               />
             </PopoverContent>
           </PopoverPortal>
