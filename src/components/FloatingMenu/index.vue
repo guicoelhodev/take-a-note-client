@@ -19,11 +19,12 @@
 </template>
 
 <script setup lang="ts">
+import { FloatingMenuPluginProps } from "@tiptap/extension-floating-menu";
 import { FloatingMenu } from "@tiptap/vue-3";
 import { ref, computed } from "vue";
 const { editor } = defineProps<{ editor: any }>();
 
-const inputTyped = ref<null | string>("");
+const inputTyped = ref("");
 const filteredButtons = computed(() =>
   buttons.filter((b) =>
     b.title.toLowerCase().includes(inputTyped.value.toLowerCase())
@@ -38,9 +39,11 @@ type IButton = {
 };
 
 const shouldShowOpenOptions = (
-  props: Exclude<FloatingMenuPluginProps["shouldShow"], null>
+  props: any
+  //Exclude<FloatingMenuPluginProps["shouldShow"], null
 ) => {
-  const currentText = props.state.selection.$from.nodeBefore?.textContent ?? "";
+  const currentText =
+    props?.state?.selection.$from.nodeBefore?.textContent ?? "";
 
   if (currentText.includes("/")) {
     inputTyped.value = currentText.substring(1);
