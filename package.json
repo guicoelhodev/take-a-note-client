@@ -11,6 +11,7 @@
   "devDependencies": {
     "@iconify/vue": "^4.1.1",
     "@nuxt/devtools": "latest",
+    "@nuxtjs/apollo": "^5.0.0-alpha.6",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^18.17.3",
