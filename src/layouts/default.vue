@@ -15,21 +15,16 @@
     </main>
 
     <aside class="p-4 border border-red-300 max-w-[280px] w-full">
-      
-    <button @click="userStore.handleCount">ADD</button>
-      {{ userStore.count }}
-    
-      {{ userStore.user ?? 'Sem dados' }}
+      {{ userStore.user ?? "Sem dados" }}
     </aside>
   </div>
 </template>
 
 <script setup lang="ts">
-  import { useUserStore } from '~/store/UserStore'
+import { useUserStore } from "~/store/UserStore";
 
-  const userStore = useUserStore();
-  // const user = computed(() => userStore.user);
+const userStore = useUserStore();
+// const user = computed(() => userStore.user);
 
-  onMounted(() => {
-  })
+onMounted(() => {});
 </script>

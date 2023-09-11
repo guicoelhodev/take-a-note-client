@@ -3,20 +3,19 @@
 </template>
 
 <script lang="ts" setup>
-
-import { IUser } from '~/models/User'
-import { useUserStore } from '~/store/UserStore'
+import { IUser } from "~/models/User";
+import { useUserStore } from "~/store/UserStore";
 
 type IUserResponse = {
-  data: { 
-    logIn: IUser & { __typename: string}
-  }
+  data: {
+    logIn: IUser & { __typename: string };
+  };
 };
 
 const route = useRoute();
 const jwt = getJwtToken(route.hash);
-const userStore = useUserStore();
 
+const userStore = useUserStore();
 
 const { mutate: fetchUserLogin } = useMutation(
   gql`
@@ -42,11 +41,13 @@ definePageMeta({
 });
 
 onMounted(async () => {
-  const { data: { logIn } } = await fetchUserLogin() as IUserResponse;
+  const {
+    data: { logIn },
+  } = (await fetchUserLogin()) as IUserResponse;
   localStorage.setItem("@take_a_note:token", jwt["#access_token"]);
   localStorage.setItem("@take_a_note:expires_at", jwt.expires_at);
 
   userStore.handleUserInfo(logIn);
-  return window.open('/app', '_self')
+  return navigateTo("/app");
 });
 </script>

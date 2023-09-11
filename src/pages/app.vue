@@ -1,10 +1,4 @@
-<script setup lang="ts">
-  import { useUserStore } from '~/store/UserStore'
-
-  const userStore = useUserStore();
-</script>
+<script setup lang="ts"></script>
 <template>
-
-  {{ userStore.user }}
-  <!-- <Editor /> -->
+  <Editor />
 </template>

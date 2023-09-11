@@ -1,19 +1,13 @@
 import { defineStore } from "pinia";
 import { IUser } from "~/models/User";
 
-export const useUserStore = defineStore('user', () => {
-
+export const useUserStore = defineStore("user", () => {
   const user = ref<IUser | null>(null);
-  const count = ref(0)
 
-  function handleUserInfo (userInfo: IUser) {
+  function handleUserInfo(userInfo: IUser) {
+    console.log("aqui");
     user.value = userInfo;
-    console.log(user.value)
-  };
-
-  function handleCount (){
-    count.value ++;
   }
 
-  return { user, handleUserInfo, count, handleCount };
-})
+  return { user, handleUserInfo };
+});
