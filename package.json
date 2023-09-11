@@ -19,6 +19,7 @@
     "nuxt": "^3.6.5"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.11",
     "@tiptap/extension-bubble-menu": "^2.1.7",
     "@tiptap/extension-code-block-lowlight": "^2.1.7",
     "@tiptap/extension-floating-menu": "^2.1.7",
@@ -26,6 +27,10 @@
     "@tiptap/starter-kit": "^2.1.7",
     "@tiptap/vue-3": "^2.1.7",
     "lowlight": "^2.9.0",
+    "pinia": "^2.1.6",
     "radix-vue": "^0.1.26"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

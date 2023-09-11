@@ -4,7 +4,9 @@
 
 <script lang="ts" setup>
 
-import { IUser } from '../models/User'
+import { IUser } from '~/models/User'
+import { useUserStore } from '~/store/UserStore'
+
 type IUserResponse = {
   data: { 
     logIn: IUser & { __typename: string}
@@ -13,6 +15,8 @@ type IUserResponse = {
 
 const route = useRoute();
 const jwt = getJwtToken(route.hash);
+const userStore = useUserStore();
+
 
 const { mutate: fetchUserLogin } = useMutation(
   gql`
@@ -42,6 +46,7 @@ onMounted(async () => {
   localStorage.setItem("@take_a_note:token", jwt["#access_token"]);
   localStorage.setItem("@take_a_note:expires_at", jwt.expires_at);
 
-  console.log(logIn);
+  userStore.handleUserInfo(logIn);
+  return window.open('/app', '_self')
 });
 </script>

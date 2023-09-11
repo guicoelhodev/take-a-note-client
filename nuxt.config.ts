@@ -4,7 +4,7 @@ import tailwindTypography from "@tailwindcss/typography";
 export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: "./src",
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/apollo"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/apollo", '@pinia/nuxt'],
   tailwindcss: {
     config: {
       plugins: [tailwindTypography],
