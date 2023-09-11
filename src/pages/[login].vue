@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <h1>Login session</h1>
-  </div>
+  <p>sdjhdsjh</p>
 </template>
 
-<script setup lang="ts">
-import { onMounted } from "vue";
+<script lang="ts" setup>
+
+import { IUser } from '../models/User'
+type IUserResponse = {
+  data: { 
+    logIn: IUser & { __typename: string}
+  }
+};
 
 const route = useRoute();
-
 const jwt = getJwtToken(route.hash);
 
 const { mutate: fetchUserLogin } = useMutation(
@@ -30,9 +33,15 @@ const { mutate: fetchUserLogin } = useMutation(
   }
 );
 
-onMounted(async () => {
-  const { data } = (await fetchUserLogin()) as any;
+definePageMeta({
+  layout: false,
+});
 
-  console.log(data.logIn);
+onMounted(async () => {
+  const { data: { logIn } } = await fetchUserLogin() as IUserResponse;
+  localStorage.setItem("@take_a_note:token", jwt["#access_token"]);
+  localStorage.setItem("@take_a_note:expires_at", jwt.expires_at);
+
+  console.log(logIn);
 });
 </script>
