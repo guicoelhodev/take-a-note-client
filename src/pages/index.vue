@@ -38,7 +38,7 @@ import { Icon } from "@iconify/vue";
 type IResponseSend = {
   data: {
     sendJwtToken: string;
-  }
+  };
 };
 
 const { mutate: sendJwtTokenMutation } = useMutation(gql`
@@ -47,16 +47,39 @@ const { mutate: sendJwtTokenMutation } = useMutation(gql`
   }
 `);
 
-const sendJwtToken = async(provider: 'github' | 'google') => {
-  const { data: { sendJwtToken } } = await sendJwtTokenMutation({
-    provider
-  }) as IResponseSend;
+const sendJwtToken = async (provider: "github" | "google") => {
+  const {
+    data: { sendJwtToken },
+  } = (await sendJwtTokenMutation({
+    provider,
+  })) as IResponseSend;
 
-  window.open(sendJwtToken, '_self');
+  window.open(sendJwtToken, "_self");
 };
+
+const { mutate: fetchUserLogin, error } = useMutation(
+  gql`
+    mutation LogIn($jwtToken: String!) {
+      logIn(jwtToken: $jwtToken) {
+        avatar_url
+        email
+        full_name
+        user_name
+        id
+      }
+    }
+  `
+);
 
 definePageMeta({
   layout: false,
 });
 
+onMounted(async () => {
+  const userData = await fetchUserLogin({
+    jwtToken: localStorage.getItem("@take_a_note:token"),
+  });
+
+  if (userData?.data?.logIn) return navigateTo("/app");
+});
 </script>
