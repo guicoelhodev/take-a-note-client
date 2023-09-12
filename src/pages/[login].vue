@@ -43,7 +43,6 @@ onMounted(async () => {
   })) as IUserResponse;
 
   localStorage.setItem("@take_a_note:token", jwt["#access_token"]);
-  localStorage.setItem("@take_a_note:expires_at", jwt.expires_at);
 
   userStore.handleUserInfo(logIn);
   return navigateTo("/app");
