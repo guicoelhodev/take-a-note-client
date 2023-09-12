@@ -2,8 +2,6 @@
 import { BubbleMenu } from "@tiptap/vue-3";
 
 const { editor } = defineProps<{ editor: any }>();
-
-console.log(editor);
 </script>
 
 <template>
