@@ -28,12 +28,7 @@ const { mutate: fetchUserLogin } = useMutation(
         id
       }
     }
-  `,
-  {
-    variables: {
-      jwtToken: jwt["#access_token"],
-    },
-  }
+  `
 );
 
 definePageMeta({
@@ -43,7 +38,10 @@ definePageMeta({
 onMounted(async () => {
   const {
     data: { logIn },
-  } = (await fetchUserLogin()) as IUserResponse;
+  } = (await fetchUserLogin({
+    jwtToken: jwt["#access_token"],
+  })) as IUserResponse;
+
   localStorage.setItem("@take_a_note:token", jwt["#access_token"]);
   localStorage.setItem("@take_a_note:expires_at", jwt.expires_at);
 
