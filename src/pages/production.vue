@@ -6,11 +6,12 @@
       </button>
     </aside>
 
-    <Editor />
+    <Editor :text="productionEditorMessage" />
   </section>
 </template>
 
 <script setup lang="ts">
+import { productionEditorMessage } from "~/data/productionEditorMessage";
 definePageMeta({
   layout: false,
 });
