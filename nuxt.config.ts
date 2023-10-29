@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   srcDir: "./src",
-  pages: true,
+  buildDir: "dist",
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/apollo", "@pinia/nuxt"],
   tailwindcss: {
     config: {
@@ -20,6 +20,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  ssr: false,
 
   runtimeConfig: {
     public: {
