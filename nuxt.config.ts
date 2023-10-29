@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   srcDir: "./src",
+  pages: true,
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/apollo", "@pinia/nuxt"],
   tailwindcss: {
     config: {
