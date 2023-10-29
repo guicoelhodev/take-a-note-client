@@ -12,7 +12,10 @@
         totally free to use!
       </h3>
 
-      <article class="w-full max-w-[600px] pt-4 flex justify-center gap-4">
+      <article
+        v-if="!PROD.length"
+        class="w-full max-w-[600px] pt-4 flex justify-center gap-4"
+      >
         <button
           class="bg-zinc-900 text-white py-2 px-4 rounded-md flex gap-2 items-center"
           @click="sendJwtToken('github')"
@@ -28,6 +31,15 @@
           Log In with Google
         </button>
       </article>
+
+      <article v-else="PROD.length">
+        <button
+          class="bg-red-500 text-white py-2 px-4 rounded-md flex gap-2 items-center border border-red-500 text-lg"
+          @click="navigateTo('/production')"
+        >
+          View demo preview
+        </button>
+      </article>
     </section>
   </div>
 </template>
@@ -41,6 +53,9 @@ type IResponseSend = {
   };
 };
 
+const {
+  public: { PROD },
+} = useRuntimeConfig();
 const { mutate: sendJwtTokenMutation } = useMutation(gql`
   mutation Mutation($provider: String!) {
     sendJwtToken(provider: $provider)
@@ -73,13 +88,14 @@ const { mutate: fetchUserLogin, error } = useMutation(
 
 definePageMeta({
   layout: false,
+  // middleware: ["redirect"],
 });
 
 onMounted(async () => {
+  if (!!PROD) return;
   const userData = await fetchUserLogin({
     jwtToken: localStorage.getItem("@take_a_note:token"),
   });
-
   if (userData?.data?.logIn) return navigateTo("/app");
 });
 </script>
