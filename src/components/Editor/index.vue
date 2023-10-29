@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import StarterKit from "@tiptap/starter-kit";
 import { EditorContent, useEditor } from "@tiptap/vue-3";
-import { blogContent } from "./example";
+// import { blogContent } from "./example";
 import { lowlight } from "lowlight";
 
 import Document from "@tiptap/extension-document";
@@ -20,6 +20,8 @@ lowlight.registerLanguage("css", css);
 lowlight.registerLanguage("js", js);
 lowlight.registerLanguage("ts", ts);
 
+const { text } = defineProps<{ text: string }>();
+
 const editor = useEditor({
   extensions: [
     StarterKit,
@@ -30,13 +32,16 @@ const editor = useEditor({
       lowlight,
     }),
   ],
-  content: blogContent,
+  content: text,
 });
 </script>
 
 <template>
   <ClientOnly fallback="Loading...">
-    <div class="w-full max-w-[1366px] prose outline-0" id="menu">
+    <div
+      class="w-full max-w-[1366px] prose outline-0 border-2 border-red-500 p-4"
+      id="menu"
+    >
       <BubbleMenu :editor="editor" />
       <FloatingMenu :editor="editor" />
       <editor-content :v-if="editor" :editor="editor" />

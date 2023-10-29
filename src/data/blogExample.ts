@@ -1,4 +1,4 @@
-export const blogContent = `
+export const blogExample = `
    <h1>Comparing Vue.js and React.js</h1>
     <p>Posted on August 25, 2023</p>
 

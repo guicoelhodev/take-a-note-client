@@ -20,6 +20,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from "~/store/UserStore";
+const runtimeConfig = useRuntimeConfig();
 
 const userStore = useUserStore();
 const { mutate: fetchUserLogin, error } = useMutation(
@@ -37,6 +38,8 @@ const { mutate: fetchUserLogin, error } = useMutation(
 );
 
 const getUserInfoBasedOnSavedToken = async () => {
+  if (process.env.PROD_ENVIRONMENT === "true") return;
+
   if (!localStorage.getItem("@take_a_note:token")) return navigateTo("/");
 
   if (userStore.user) return;
@@ -52,6 +55,7 @@ const getUserInfoBasedOnSavedToken = async () => {
   userStore.handleUserInfo(userData?.data.logIn);
 };
 onMounted(async () => {
+  if (!!runtimeConfig.public.PROD) return navigateTo("/production");
   await getUserInfoBasedOnSavedToken();
 });
 </script>
