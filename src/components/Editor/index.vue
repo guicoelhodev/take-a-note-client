@@ -36,7 +36,10 @@ const editor = useEditor({
 
 <template>
   <ClientOnly fallback="Loading...">
-    <div class="w-full max-w-[1366px] prose outline-0" id="menu">
+    <div
+      class="w-full max-w-[1366px] prose outline-0 border-2 border-red-500 p-4"
+      id="menu"
+    >
       <BubbleMenu :editor="editor" />
       <FloatingMenu :editor="editor" />
       <editor-content :v-if="editor" :editor="editor" />
